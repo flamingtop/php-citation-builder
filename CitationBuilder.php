@@ -11,7 +11,7 @@ namespace CitationBuilder;
  
  * It takes a citation specification e.g.
  *
- *   {@title}{, by @author}{, @co_author}{, published by $publisher{, @publication_year}}
+ *   {@title}{, by @author}{, @co_author}{, published by @publisher{, @publication_year}}
  *
  * and a mapping array e.g.
  *
