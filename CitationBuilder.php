@@ -35,11 +35,11 @@ class CitationBuilder {
  	private $data = NULL;
 	
 	/**
-	 * @var string
-	 */
-	private $spec = NULL;
-	
-	
+	 * @Var string
+   */
+  private $spec = NULL;
+  
+  
   /**
    * Instantiate a CitationBuilder Object
    * 
@@ -47,8 +47,8 @@ class CitationBuilder {
    * @param array $data
    *
    */
-	public function __construct($spec, $data=array()) {
-		// deal with multi-line specs
+  public function __construct($spec, $data=array()) {
+    // deal with multi-line specs
 		$spec = str_replace(array("\r", "\n"), "", $spec);
 		
  		if (!$this->_validateSpec($spec))
