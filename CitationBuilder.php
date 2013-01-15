@@ -189,10 +189,32 @@ class CitationBuilder {
 
     preg_match('/(?<!\\\)@(?P<key>[\w_\d]+).*/', $segment, $match);
     $key   = $match['key'];
+    self::debug('key'.$key);
     $token = '@'.$key;
     $value = $this->_escape($this->_map($key));
 
-    self::debug('key'.$key);
+    /* Combo Tokens
+     *
+     *  E.g.
+     *
+     *  Given A=John, B=Bob, C=Alice, {@A|B|C} results in: John, Bob, Alice
+     *  Given A=NULL, B=Bob, C=Alice, {@A|B|C} results in: Bob, Alice
+     *  Given A=NULL, B=NULL, C=Alice, {@A|B|C} results in: Alice
+     */
+    $combo = explode('|', $key);
+    if(count($combo) > 1) {
+        // combo tokens like {@A|B|C}
+        $tmp = array();
+        foreach ($combo as $c) {
+            if($this->_map($c)) {
+                $tmp[] = $this->_map($c);
+            }
+        }
+        $value = implode(', ', $tmp);
+    } else {
+        // ordinary tokens
+        $value = $this->_map($key);
+    }
 
     if($value)
       // found mapping value
