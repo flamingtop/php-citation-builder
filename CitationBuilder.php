@@ -187,7 +187,7 @@ class CitationBuilder {
   private function _expand($segment) {
     self::debug('segment:'.$segment);
 
-    preg_match('/(?<!\\\)@(?P<key>[\w_\d]+).*/', $segment, $match);
+    preg_match('/(?<!\\\)@(?P<key>[\w_\d+]+).*/', $segment, $match);
     $key   = $match['key'];
     self::debug('key'.$key);
     $token = '@'.$key;
@@ -197,11 +197,11 @@ class CitationBuilder {
      *
      *  E.g.
      *
-     *  Given A=John, B=Bob, C=Alice, {@A|B|C} results in: John, Bob, Alice
-     *  Given A=NULL, B=Bob, C=Alice, {@A|B|C} results in: Bob, Alice
-     *  Given A=NULL, B=NULL, C=Alice, {@A|B|C} results in: Alice
+     *  Given A=John, B=Bob, C=Alice, {@A+B+C} results in: John, Bob, Alice
+     *  Given A=NULL, B=Bob, C=Alice, {@A+B+C} results in: Bob, Alice
+     *  Given A=NULL, B=NULL, C=Alice, {@A+B+C} results in: Alice
      */
-    $combo = explode('|', $key);
+    $combo = explode('+', $key);
     if(count($combo) > 1) {
         // combo tokens like {@A|B|C}
         $tmp = array();
