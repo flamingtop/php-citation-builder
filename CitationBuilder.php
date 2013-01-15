@@ -195,7 +195,7 @@ class CitationBuilder {
 
     /* Combo Tokens
      *
-     *  E.g.
+     *  E.g. AND conjunction
      *
      *  Given A=John, B=Bob, C=Alice, {@A+B+C} results in: John, Bob, Alice
      *  Given A=NULL, B=Bob, C=Alice, {@A+B+C} results in: Bob, Alice
@@ -235,7 +235,7 @@ class CitationBuilder {
    * @param string $key
    */
   private function _map($key) {
-    return isset($this->data[$key]) ? $this->data[$key] : false;
+    return isset($this->data[$key]) ? $this->_escape($this->data[$key]) : false;
   }
   
 

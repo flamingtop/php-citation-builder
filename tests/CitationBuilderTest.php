@@ -59,7 +59,13 @@ class CitationBuilderTest extends PHPUnit_Framework_TestCase {
         'token1'=>'@value1',
         'token2'=>'{value2} @ttt',
         'token3'=>'@value3'
-      ),'@value1, {value2} @ttt literal @value3 literal')
+      ),'@value1, {value2} @ttt literal @value3 literal'),
+      array('{@token1}{, @token2+token3+token4}', array(
+          'token1' => 'value1',
+          'token2' => 'value2',
+          'token3' => 'value3',
+          'token4' => 'value4'
+      ),'value1, value2, value3, value4'),
     );
 
     foreach($cases as $case) {
